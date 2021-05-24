@@ -1,9 +1,10 @@
 package fr.neamar.kiss;
 
+import static android.view.HapticFeedbackConstants.LONG_PRESS;
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -38,6 +39,7 @@ import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 
 import java.util.ArrayList;
 
@@ -60,9 +62,7 @@ import fr.neamar.kiss.utils.PackageManagerUtils;
 import fr.neamar.kiss.utils.Permission;
 import fr.neamar.kiss.utils.SystemUiVisibilityHelper;
 
-import static android.view.HapticFeedbackConstants.LONG_PRESS;
-
-public class MainActivity extends Activity implements QueryInterface, KeyboardScrollHider.KeyboardHandler, View.OnTouchListener {
+public class MainActivity extends FragmentActivity implements QueryInterface, KeyboardScrollHider.KeyboardHandler, View.OnTouchListener {
 
     public static final String START_LOAD = "fr.neamar.summon.START_LOAD";
     public static final String LOAD_OVER = "fr.neamar.summon.LOAD_OVER";
@@ -443,6 +443,7 @@ public class MainActivity extends Activity implements QueryInterface, KeyboardSc
     @Override
     protected void onNewIntent(Intent intent) {
         //Set the intent so KISS can tell when it was launched as an assistant
+        super.onNewIntent(intent);
         setIntent(intent);
 
         // This is called when the user press Home again while already browsing MainActivity
@@ -550,11 +551,13 @@ public class MainActivity extends Activity implements QueryInterface, KeyboardSc
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         forwarderManager.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         permissionManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
@@ -953,4 +956,5 @@ public class MainActivity extends Activity implements QueryInterface, KeyboardSc
 
         return homePackage.equals(this.getPackageName());
     }
+
 }

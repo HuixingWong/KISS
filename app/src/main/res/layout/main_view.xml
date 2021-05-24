@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/widgetLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/resultLayout"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" />
+
+    <FrameLayout
+        android:id="@+id/resultLayout"
+        tools:ignore="UnusedAttribute"
+        tools:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/externalFavoriteBar"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="false"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="?attr/listBackgroundColor"
+        android:elevation="2dp"
+        android:visibility="gone">
+
+        <fr.neamar.kiss.ui.AnimatedListView
+            android:id="@android:id/list"
+            tools:listitem="@layout/item_app"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="top|center_horizontal"
+            android:cacheColorHint="@android:color/transparent"
+            android:divider="?attr/dividerDrawable"
+            android:dividerHeight="1dp"
+            android:stackFromBottom="true"
+            android:transcriptMode="alwaysScroll" />
+
+        <fr.neamar.kiss.ui.BottomPullEffectView
+            android:id="@+id/listEdgeEffect"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal|bottom" />
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/externalFavoriteBar"
+        tools:ignore="UnusedAttribute"
+        tools:layout="@layout/favorite_item"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/favorite_height"
+        android:layout_above="@id/searchEditLayout"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:animateLayoutChanges="true"
+        android:background="?attr/searchBackgroundColor"
+        android:baselineAligned="false"
+        android:clipToPadding="false"
+        android:elevation="2dp"
+        android:gravity="center_vertical"
+        android:importantForAccessibility="no"
+        android:orientation="horizontal" />
+
+    <RelativeLayout
+        android:id="@+id/searchEditLayout"
+        tools:ignore="UnusedAttribute"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bar_height"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="?attr/searchBackgroundColor"
+        android:clipToPadding="false"
+        android:elevation="2dp">
+
+        <FrameLayout
+            android:id="@+id/leftHandSideButtonsWrapper"
+            android:layout_width="@dimen/launcher_button_width"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true">
+
+
+            <ImageView
+                android:id="@+id/launcherButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?attr/appSelectableItemBackground"
+                android:contentDescription="@string/main_kiss"
+                android:focusable="true"
+                android:onClick="onLauncherButtonClicked"
+                android:paddingLeft="@dimen/launcher_button_padding"
+                android:paddingRight="@dimen/launcher_button_padding"
+                android:src="@drawable/ic_launcher"
+                android:tag="showMenu" />
+
+            <ProgressBar
+                android:id="@+id/loaderBar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:indeterminate="true"
+                android:paddingLeft="@dimen/launcher_button_padding"
+                android:paddingRight="@dimen/launcher_button_padding"
+                android:visibility="invisible" />
+
+        </FrameLayout>
+
+        <fr.neamar.kiss.ui.SearchEditText
+            android:id="@+id/searchEditText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_margin="1dp"
+            android:layout_toStartOf="@id/rightHandSideButtonsWrapper"
+            android:layout_toLeftOf="@id/rightHandSideButtonsWrapper"
+            android:layout_toEndOf="@id/leftHandSideButtonsWrapper"
+            android:layout_toRightOf="@id/leftHandSideButtonsWrapper"
+            android:background="@android:color/transparent"
+            android:hint="@string/ui_search_hint"
+            android:imeOptions="flagNoExtractUi|actionSearch"
+            android:importantForAutofill="no"
+            android:inputType="textVisiblePassword|textNoSuggestions"
+            android:singleLine="true"
+            android:textColor="?attr/searchColor"
+            android:textColorHint="?android:attr/textColorSecondary"
+            android:textCursorDrawable="@null"
+            android:textSize="16sp" />
+
+        <FrameLayout
+            android:id="@+id/rightHandSideButtonsWrapper"
+            android:layout_width="@dimen/launcher_button_width"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true">
+
+            <ImageView
+                android:id="@+id/menuButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?attr/appSelectableItemBackground"
+                android:contentDescription="@string/main_menu"
+                android:focusable="true"
+                android:onClick="onMenuButtonClicked"
+                android:paddingLeft="@dimen/launcher_button_padding"
+                android:paddingRight="@dimen/launcher_button_padding"
+                android:src="@drawable/dots"
+                android:tint="?attr/searchColor" />
+
+            <ImageView
+                android:id="@+id/clearButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?attr/appSelectableItemBackground"
+                android:contentDescription="@string/main_clear"
+                android:focusable="true"
+                android:onClick="onClearButtonClicked"
+                android:paddingLeft="@dimen/launcher_button_padding"
+                android:paddingRight="@dimen/launcher_button_padding"
+                android:src="@drawable/clear_dark"
+                android:tint="?attr/searchColor"
+                android:visibility="visible" />
+        </FrameLayout>
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@android:id/empty"
+        tools:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/externalFavoriteBar"
+        android:visibility="visible">
+
+        <include
+            android:id="@+id/main_empty"
+            layout="@layout/main_empty" />
+    </ScrollView>
+
+    <include
+        android:id="@+id/mainKissbar"
+        layout="@layout/main_kissbar"
+        tools:ignore="DuplicateIncludedIds"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@android:id/list"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:visibility="gone" />
+
+</RelativeLayout>

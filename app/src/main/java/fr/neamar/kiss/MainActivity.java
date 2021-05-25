@@ -220,7 +220,7 @@ public class MainActivity extends FragmentActivity implements QueryInterface, Ke
         /*
          * Set the view and store all useful components
          */
-        setContentView(R.layout.main);
+        setContentView(R.layout.main_motion);
         this.list = this.findViewById(android.R.id.list);
         this.listContainer = (View) this.list.getParent();
         this.emptyListView = this.findViewById(android.R.id.empty);
